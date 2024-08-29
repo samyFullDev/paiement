@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Échec de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            color: #721c24;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .error-container {
+            text-align: center;
+            background-color: #f5c6cb;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .error-container h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .error-container p {
+            font-size: 1.2em;
+        }
+        .error-container .reason, 
+        .error-container .client-info, 
+        .error-container .network-info {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .payment-method {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .options {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .options button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .options button:hover {
+            background-color: #b82d70;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
+            }
+            .error-container {
+                max-width: 400px;
+            }
+            .options button {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Échec du Paiement</h1>
+        <p>Votre paiement par cryptomonnaie n'a pas été effectué avec succès.</p>
+
+        <p class="client-info">Nom du client : <span id="nom-client"></span></p>
+        <p class="network-info">Réseau utilisé : <span id="reseau-utilise"></span></p>
+        <p class="reason">Raison : <span id="raison-affichee"></span></p>
+
+        <div class="options">
+            <p>Que souhaitez-vous faire ?</p>
+            <button onclick="retryPayment()">Réessayer le paiement</button>
+            <button onclick="goHome()">Retour à l'accueil</button>
+        </div>
+    </div>
+
+    <script>
+        // Récupérer les paramètres depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const nom = urlParams.get('nom');
+        const reseau = urlParams.get('reseau');
+        const raison = urlParams.get('raison');
+
+        // Afficher les informations dans la page
+        document.getElementById('nom-client').textContent = nom || "Non spécifié";
+        document.getElementById('reseau-utilise').textContent = reseau || "Non spécifié";
+        document.getElementById('raison-affichee').textContent = raison || "Non spécifiée";
+
+        // Fonctions pour les boutons
+        function retryPayment() {
+            window.location.href = "payment-form.html"; // Remplacez par l'URL de votre formulaire de paiement
+        }
+
+        function goHome() {
+            window.location.href = "index.html"; // Remplacez par l'URL de votre page d'accueil
+        }
+    </script>
+</body>
+</html>

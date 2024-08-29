@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Sécurisé - Échec de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .form-container, .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .form-container h2, .login-container h2 {
+            margin-bottom: 15px;
+        }
+        .form-container label, .login-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .form-container input, .login-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .form-container button, .login-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-container button:hover, .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
+            }
+            .form-container, .login-container {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Conteneur de Connexion -->
+    <div class="login-container" id="login-container">
+        <h2>Accès Sécurisé</h2>
+        <form id="login-form">
+            <label for="code">Entrez le code d'accès :</label>
+            <input type="password" id="code" required>
+            <button type="submit">Accéder</button>
+        </form>
+    </div>
+
+    <!-- Conteneur du Formulaire -->
+    <div class="form-container hidden" id="form-container">
+        <h2>Raison de l'échec du paiement</h2>
+        <form id="payment-form" action="failure.html" method="get">
+            <label for="nom">Nom du client :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="reseau">Réseau utilisé :</label>
+            <input type="text" id="reseau" name="reseau" required>
+
+            <label for="raison">Veuillez sélectionner la raison :</label>
+            <select id="raison" name="raison" required>
+                <option value="" disabled selected>Choisir une raison</option>
+                <option value="Adresse de portefeuille incorrecte">Carte d'investisseur nécessaire</option>
+                <option value="Fonds insuffisants">Fonds insuffisants</option>
+                <option value="Transaction non confirmée">Recharge Nécessaire</option>
+                <option value="Adresse de portefeuille incorrecte">Code Incorrect</option>
+                <option value="Temps de transaction expiré">Temps de transaction expiré</option>
+                <option value="Autre erreur technique">Autre erreur technique</option>
+            </select>
+            <button type="submit">Soumettre</button>
+        </form>
+    </div>
+
+    <script>
+        // Code d'accès sécurisé
+        const correctCode = "2577"; // Le code à vérifier
+        const loginContainer = document.getElementById('login-container');
+        const formContainer = document.getElementById('form-container');
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const enteredCode = document.getElementById('code').value;
+            if (enteredCode === correctCode) {
+                loginContainer.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+            } else {
+                alert("Code incorrect. Veuillez réessayer.");
+            }
+        });
+    </script>
+</body>
+</html>
