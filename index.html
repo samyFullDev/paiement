@@ -75,7 +75,7 @@
         <h2>Accès Sécurisé</h2>
         <form id="login-form">
             <label for="code">Entrez le code d'accès :</label>
-            <input type="password" id="code" required>
+            <input type="password" id="code" name="code" required>
             <button type="submit">Accéder</button>
         </form>
     </div>
@@ -83,7 +83,7 @@
     <!-- Conteneur du Formulaire -->
     <div class="form-container hidden" id="form-container">
         <h2>Raison de l'échec du paiement</h2>
-        <form id="payment-form" action="failure.html" method="get">
+        <form id="payment-form" action="failure.html" method="post">
             <label for="nom">Nom du client :</label>
             <input type="text" id="nom" name="nom" required>
 
@@ -99,8 +99,8 @@
                 <option value="Code Incorrect">Code Incorrect</option>
                 <option value="Temps de transaction expiré">Temps de transaction expiré</option>
                 <option value="Autre erreur technique">Autre erreur technique</option>
-                <option value="Code Incorrect">Numero Incorrect</option>
-                <option value="Code Incorrect">Montant de recharge dépassé</option>
+                <option value="Numero Incorrect">Numéro Incorrect</option>
+                <option value="Montant de recharge dépassé">Montant de recharge dépassé</option>
             </select>
             <button type="submit">Soumettre</button>
         </form>
